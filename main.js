@@ -1,23 +1,23 @@
 console.log('Hola mundo :D')
 
-const persona = {
-  name: "Diana",
-  edad: 20,
-  saludar: function () {
+class Persona {
+  name = ''
+  edad = 20
+  constructor(n, e) {
+    this.name = n
+    this.edad = e
+  }
+  saludar() {
     console.log('Hola soy', this.name)
-  },
-  incrementarEdad() {
-    this.edad += 1
-  },
-  decirEdad: function () {
-    console.log('Mi edad es', this.edad)
   }
 }
 
-const persona2 = {
-  name: "Candela",
-  edad: 20,
-}
+const persona = new Persona("Diana", 19)
+const persona2 = new Persona("Candela", 19)
+const persona3 = new Persona("Anto", 19)
 
 persona.saludar()
-persona.decirEdad()
+persona2.saludar()
+persona3.saludar()
+
+console.log(persona instanceof Persona)
