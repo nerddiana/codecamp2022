@@ -12,13 +12,13 @@ class Persona {
   }
 }
 
-const persona = [new Persona("Diana", 19), new Persona("Candela", 19), new Persona("Anto", 19)]
+const persona = new Persona("Diana", 19)
+const personas = [new Persona("Diana", 19), new Persona("Candela", 19), new Persona("Anto", 19)]
 
-persona[2].saludar()
+personas[2].saludar()
 
-console.log(persona instanceof Persona)
+console.log(persona['name'])
 
-const frutas = ["Fresa", "Mango", "Kiwi"]
-frutas[1] = "Banana"
-frutas.push("Mandarina")
-console.log(frutas[3])
+for (const atributo in persona) {
+  console.log(persona[atributo])
+}
