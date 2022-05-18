@@ -15,10 +15,6 @@ class Persona {
 const persona = new Persona("Diana", 19)
 const personas = [new Persona("Diana", 19), new Persona("Candela", 19), new Persona("Anto", 19)]
 
-personas[2].saludar()
-
-console.log(persona['name'])
-
-for (const atributo in persona) {
-  console.log(persona[atributo])
+function remove(indice) {
+  console.log('Click en remove', indice)
 }
