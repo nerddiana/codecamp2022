@@ -1,60 +1,24 @@
-console.log('Hola mundo :D')
+const h1 = document.querySelector("h1")
+h1.innerText = "Hola mundo"
+console.log(h1);
 
-// JSON JavaScript Object Notation
-const obj = {
-  color: "negro",
-  saludar() {
-    console.log("color: ", this.color);
-  }
+const ul = document.querySelector("ul");
+console.log(ul);
+
+const tasks = [
+  { text: "Lavar ropa" },
+  { text: "Tomar te" },
+  { text: "Estudiar JavaScript" },
+];
+
+let template = "";
+
+for (const task of tasks) {
+  // template = template + "<li>" + task.text + "</li>";
+  const m = "mundo";
+  template = `${template}\n<li>${task.text}</li>`;
 }
 
-obj.saludar();
+console.log(template);
 
-const obj2 = {
-  color: "negro",
-  altura: 120,
-}
-
-class Persona {
-  name = ''
-  edad = 0
-  constructor(n, e) {
-    this.name = n
-    this.edad = e
-  }
-  saludar() {
-    console.log('Hola soy', this.name)
-  }
-}
-
-const persona = new Persona("Diana", 19)
-
-persona.saludar();
-
-const personas = [new Persona("Diana", 19), new Persona("Candela", 19), new Persona("Anto", 19)]
-
-function remove(indice) {
-  console.log('Click en remove', indice)
-}
-
-const frutas = ["Mango", "Fresa", 1, 1.0, new Persona("Persona 1", 20)];
-
-const key = "name";
-console.log(frutas[4].name)
-
-const foo = function () {
-  const key = "otro valor";
-  console.log("Hi foo!", key);
-}
-
-console.log(typeof foo);
-
-foo();
-
-console.log(key);
-
-const bar = () => {
-  console.log("bar!");
-}
-
-bar();
+ul.innerHTML = template;
