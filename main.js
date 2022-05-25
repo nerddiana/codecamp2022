@@ -7,24 +7,31 @@ console.log(form);
 const input = document.getElementById("tasktitle");
 console.log(input);
 
-let tasks = [];
+let tasks = [
+  { text: "Lavar la ropa" },
+  { text: "Cita médica" },
+];
 
 function remove(event) {
-  let index = 0;
-  for (const taskIndex in tasks) {
-    const task = tasks[taskIndex];
-    if (task.text === event.target.textContent) {
-      index = taskIndex;
-    }
-  }
+  // let index = -1;
+  // for (const taskIndex in tasks) {
+  //   const task = tasks[taskIndex];
+  //   console.log("task", task.text);
+  //   if (task.text === event.target.textContent) {
+  //     index = taskIndex;
+  //   }
+  // }
 
-  console.log("match index", index);
   // const index = tasks.findIndex((task) => event.target.textContent === task.text);
+  // console.log("match index", index);
 
-  if (index >= 0) {
-    tasks.splice(index, 1);
-    render(tasks);
-  }
+  // if (index >= 0) {
+  //   tasks.splice(index, 1);
+  //   render(tasks);
+  // }
+
+  tasks = tasks.filter((task) => task.text !== event.target.textContent);
+  render(tasks);
 }
 
 function render(tasks) {
@@ -43,7 +50,7 @@ render(tasks);
 
 form.addEventListener("submit", function submit(event) {
   event.preventDefault();
-  tasks.push({ text: input.value });
+  tasks = tasks.concat({ text: input.value });
   input.value = "";
   render(tasks);
 })
