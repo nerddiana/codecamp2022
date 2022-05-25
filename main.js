@@ -54,3 +54,45 @@ form.addEventListener("submit", function submit(event) {
   input.value = "";
   render(tasks);
 })
+
+function toJSON(str) {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return {};
+  }
+}
+
+const p = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve({ key: "value" });
+  }, 3000);
+});
+
+p.then((arg) => {
+  console.log("resuelto!", arg);
+}).catch((err) => {
+  console.log(err);
+}).finally(() => {
+  console.log("al final");
+});
+
+fetch("https://jsonplaceholder.typicode.com/posts/1")
+  .then(async (res) => {
+    const respuesta = await res.json();
+    console.log(respuesta);
+  })
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
