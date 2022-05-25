@@ -1,7 +1,3 @@
-const h1 = document.querySelector("h1")
-h1.innerText = "Hola mundo"
-console.log(h1);
-
 const ul = document.querySelector("ul");
 console.log(ul);
 
@@ -11,36 +7,43 @@ console.log(form);
 const input = document.getElementById("tasktitle");
 console.log(input);
 
-const tasks = [
-  { text: "Lavar ropa" },
-  { text: "Tomar te" },
-  { text: "Estudiar JavaScript" },
-];
+let tasks = [];
 
-function render() {
-  let template = "";
-
-  for (const task of tasks) {
-    // template = template + "<li>" + task.text + "</li>";
-    template = `${template}\n<li>${task.text}</li>`;
+function remove(event) {
+  let index = 0;
+  for (const taskIndex in tasks) {
+    const task = tasks[taskIndex];
+    if (task.text === event.target.textContent) {
+      index = taskIndex;
+    }
   }
 
-  console.log(template);
+  console.log("match index", index);
+  // const index = tasks.findIndex((task) => event.target.textContent === task.text);
 
-  ul.innerHTML = template;
+  if (index >= 0) {
+    tasks.splice(index, 1);
+    render(tasks);
+  }
 }
 
-render();
+function render(tasks) {
+  console.log(tasks);
+  ul.innerHTML = "";
+  for (task of tasks) {
+    const text = document.createTextNode(task.text);
+    const li = document.createElement("li");
+    li.appendChild(text);
+    li.addEventListener("click", remove);
+    ul.appendChild(li);
+  }
+}
+
+render(tasks);
 
 form.addEventListener("submit", function submit(event) {
   event.preventDefault();
-  // tasks.push({ text: input.value });
-  const text = document.createTextNode(input.value);
-  const li = document.createElement("li");
+  tasks.push({ text: input.value });
   input.value = "";
-  li.appendChild(text);
-  li.onclick = function () {
-    li.remove();
-  }
-  ul.appendChild(li);
+  render(tasks);
 })
