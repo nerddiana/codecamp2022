@@ -1,7 +1,3 @@
-const h1 = document.querySelector("h1")
-h1.innerText = "Hola mundo"
-console.log(h1);
-
 const ul = document.querySelector("ul");
 console.log(ul);
 
@@ -11,36 +7,50 @@ console.log(form);
 const input = document.getElementById("tasktitle");
 console.log(input);
 
-const tasks = [
-  { text: "Lavar ropa" },
-  { text: "Tomar te" },
-  { text: "Estudiar JavaScript" },
+let tasks = [
+  { text: "Lavar la ropa" },
+  { text: "Cita médica" },
 ];
 
-function render() {
-  let template = "";
+function remove(event) {
+  // let index = -1;
+  // for (const taskIndex in tasks) {
+  //   const task = tasks[taskIndex];
+  //   console.log("task", task.text);
+  //   if (task.text === event.target.textContent) {
+  //     index = taskIndex;
+  //   }
+  // }
 
-  for (const task of tasks) {
-    // template = template + "<li>" + task.text + "</li>";
-    template = `${template}\n<li>${task.text}</li>`;
-  }
+  // const index = tasks.findIndex((task) => event.target.textContent === task.text);
+  // console.log("match index", index);
 
-  console.log(template);
+  // if (index >= 0) {
+  //   tasks.splice(index, 1);
+  //   render(tasks);
+  // }
 
-  ul.innerHTML = template;
+  tasks = tasks.filter((task) => task.text !== event.target.textContent);
+  render(tasks);
 }
 
-render();
+function render(tasks) {
+  console.log(tasks);
+  ul.innerHTML = "";
+  for (task of tasks) {
+    const text = document.createTextNode(task.text);
+    const li = document.createElement("li");
+    li.appendChild(text);
+    li.addEventListener("click", remove);
+    ul.appendChild(li);
+  }
+}
+
+render(tasks);
 
 form.addEventListener("submit", function submit(event) {
   event.preventDefault();
-  // tasks.push({ text: input.value });
-  const text = document.createTextNode(input.value);
-  const li = document.createElement("li");
+  tasks = tasks.concat({ text: input.value });
   input.value = "";
-  li.appendChild(text);
-  li.onclick = function () {
-    li.remove();
-  }
-  ul.appendChild(li);
+  render(tasks);
 })
